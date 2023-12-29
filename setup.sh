@@ -31,6 +31,7 @@ echo "Setting up your scripts"
 if [ -f "$DOTFILES_DIR/tmux-sessionizer" ]; then
     mkdir -p /usr/local/bin 
     link_file "$DOTFILES_DIR/tmux-sessionizer" "/usr/local/bin"
+    chmod +x "$HOME/bin/tmux-sessionizer"
 fi
 
 echo "Scripts setup complete."

@@ -15,12 +15,12 @@ link_file() {
     echo "Linked $src to $dest"
 }
 
-echo "Setting up your dotfiles..."
+# echo "Setting up your dotfiles..."
 
-link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-link_file "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
-link_file "$DOTFILES_DIR/i3/config" "$HOME/.config/i3/config"
-link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+# link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
+# link_file "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
+# link_file "$DOTFILES_DIR/i3/config" "$HOME/.config/i3/config"
+# link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
 
 echo "Dotfiles setup complete."

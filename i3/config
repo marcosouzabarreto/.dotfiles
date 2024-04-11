@@ -235,7 +235,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 # # Keyboard Brightness controls
 bindsym XF86KbdBrightnessUp exec brightnessctl -d asus::kbd_backlight s +1 
-bindsym XF86KbdBrightnessDown exec brightnessctl -d asus::kbd_backlight s -1 
+bindsym XF86KbdBrightnessDown exec brightnessctl -d asus::kbd_backlight s 1- 
 
 
 # Alsa audio controls.
@@ -253,28 +253,64 @@ exec "setxkbmap real-prog-dvorak"
 # Setup Window Management
 assign [class="Spotify"] $workspace9
 
-# Colors setup
+set $rosewater #f4dbd6
+set $flamingo  #f0c6c6
+set $pink      #f5bde6
+set $mauve     #c6a0f6
+set $red       #ed8796
+set $maroon    #ee99a0
+set $peach     #f5a97f
+set $yellow    #eed49f
+set $green     #a6da95
+set $teal      #8bd5ca
+set $sky       #91d7e3
+set $sapphire  #7dc4e4
+set $blue      #8aadf4
+set $lavender  #b7bdf8
+set $text      #cad3f5
+set $subtext1  #b8c0e0
+set $subtext0  #a5adcb
+set $overlay2  #939ab7
+set $overlay1  #8087a2
+set $overlay0  #6e738d
+set $surface2  #5b6078
+set $surface1  #494d64
+set $surface0  #363a4f
+set $base      #24273a
+set $mantle    #1e2030
+set $crust     #181926
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
 set $urgent-bg-color     #E53935
 
-# Window Colors 
-client.focused          $bg-color           $bg-color          $text-color          
+# target                 title     bg    text   indicator  border
+client.focused           $bg-color           $bg-color          $text-color          
 client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color 
 client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color 
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color        
+client.urgent            $peach    $base $peach $overlay0  $peach
+client.placeholder       $overlay0 $base $text  $overlay0  $overlay0
+client.background        $base
 
-# Bar
+# bar
 bar {
+  colors {
+    background         $base
+    statusline         $text
+    focused_statusline $text
+    active_workspace   $base $text $blue
+    focused_separator  $base
+    focused_workspace  $base $base $green
+    active_workspace   $base $base $blue
+    inactive_workspace $base $base $surface1
+    urgent_workspace   $base $base $surface1
+    binding_mode       $base $base $surface1
+  }
   status_command i3status
-  tray_output primary
-  mode hide
-  hidden_state hide
-  modifier Mod1
 }
 
+
 # Startup
-exec_always --no-startup-id feh --bg-scale /home/marco/Pictures/.wallpaper.jpg
-exec_always --no-startup-id xrandr --output HDMI-0 --auto --rate 165 --output DP-4 --auto --rate 240 --right-of HDMI-0
+exec_always feh --bg-fill /home/marco_arch/Pictures/.wallpaper.jpg
+exec_always --no-startup-id xrandr --output DP-4 --mode 2560x1440 --rate 240

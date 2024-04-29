@@ -312,5 +312,5 @@ bar {
 
 
 # Startup
-exec_always feh --bg-fill /home/marco_arch/Pictures/.wallpaper.jpg
+exec_always --no-startup-id ~/.dotfiles/config_monitors.sh
 exec_always --no-startup-id xrandr --output DP-4 --mode 2560x1440 --rate 240

@@ -29,14 +29,14 @@ return {
                 "lua_ls",
                 "rust_analyzer",
                 "gopls",
+                "pyright",
             },
             handlers = {
-                function(server_name) -- default handler (optional)
+                function(server_name) -- default handler
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
                     }
                 end,
-
                 zls = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.zls.setup({
@@ -51,7 +51,6 @@ return {
                     })
                     vim.g.zig_fmt_parse_errors = 0
                     vim.g.zig_fmt_autosave = 0
-
                 end,
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
@@ -65,6 +64,48 @@ return {
                                 }
                             }
                         }
+                    }
+                end,
+                ["pyright"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.pyright.setup {
+                        capabilities = capabilities,
+                        settings = {
+                            python = {
+                                analysis = {
+                                    autoSearchPaths = true,
+                                    useLibraryCodeForTypes = true,
+                                    diagnosticMode = "workspace",
+                                },
+                            },
+                        },
+                        -- Override the default formatting handler
+                        on_attach = function(client, bufnr)
+                            -- Disable pyright's native formatting (if any)
+                            client.server_capabilities.documentFormattingProvider = false
+
+                            -- Define a custom format function
+                            local function format_with_black()
+                                local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+                                local formatted = vim.fn.systemlist("black --quiet -", lines)
+                                if vim.v.shell_error == 0 then
+                                    vim.api.nvim_buf_set_lines(0, 0, -1, false, formatted)
+                                else
+                                    vim.notify("Black formatting failed", vim.log.levels.ERROR)
+                                end
+                            end
+
+                            -- Map vim.lsp.buf.format() to our custom function for Python files
+                            vim.api.nvim_buf_create_user_command(bufnr, "LspFormat", function()
+                                format_with_black()
+                            end, { desc = "Format buffer with black" })
+
+                            -- Optional: Keybinding for convenience
+                            vim.keymap.set("n", "<leader>f", format_with_black, {
+                                buffer = bufnr,
+                                desc = "Format with black",
+                            })
+                        end,
                     }
                 end,
             }
@@ -86,14 +127,13 @@ return {
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
-                { name = 'luasnip' }, -- For luasnip users.
+                { name = 'luasnip' },
             }, {
                 { name = 'buffer' },
             })
         })
 
         vim.diagnostic.config({
-            -- update_in_insert = true,
             float = {
                 focusable = false,
                 style = "minimal",

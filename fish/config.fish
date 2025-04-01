@@ -15,6 +15,7 @@ alias nsgc="sudo nix-store --gc"
 alias ngc="sudo nix-collect-garbage -d"
 alias ngc7="sudo nix-collect-garbage --delete-older-than 7d"
 alias ngc14="sudo nix-collect-garbage --delete-older-than 14d"
+alias nuke_docker="docker stop $(docker ps -q) && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker volume rm -f $(docker volume ls -q) && docker network rm $(docker network ls -q) && docker builder prune -a -f && docker system prune -a -f --volumes"
 
 # WORK
 alias apify="~/mutable_node_modules/bin/apify"

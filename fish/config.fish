@@ -19,6 +19,9 @@ alias nuke_docker="docker stop $(docker ps -q) && docker rm -f $(docker ps -a -q
 
 # WORK
 alias apify="~/mutable_node_modules/bin/apify"
+alias apollo-cli="~/mutable_node_modules/bin/apollo-cli"
+alias apollo="~/mutable_node_modules/bin/apollo"
+alias graphql="~/mutable_node_modules/bin/graphql"
 # if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 1 ]
 #   exec Hyprland
 # end

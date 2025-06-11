@@ -1,5 +1,5 @@
 if status is-interactive
-    bind \cf tmux-sessionizer
+    bind \cf zellij-sessionizer
 end
 
 alias cl="clear"
@@ -15,7 +15,6 @@ alias nsgc="sudo nix-store --gc"
 alias ngc="sudo nix-collect-garbage -d"
 alias ngc7="sudo nix-collect-garbage --delete-older-than 7d"
 alias ngc14="sudo nix-collect-garbage --delete-older-than 14d"
-alias nuke_docker="docker stop $(docker ps -q) && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -q) && docker volume rm -f $(docker volume ls -q) && docker network rm $(docker network ls -q) && docker builder prune -a -f && docker system prune -a -f --volumes"
 
 # WORK
 alias apify="~/mutable_node_modules/bin/apify"
@@ -30,6 +29,10 @@ set -gx EDITOR nvim
 set -gx VOLUME_STEP 5
 set -gx BRIGHTNESS_STEP 5
 
+set -gx JAVA_HOME "/opt/android-studio/jbr"
+set -gx OPENSSL_DIR "/usr"
+set -gx ANDROID_HOME "$HOME/Android/Sdk"
+set -gx NDK_HOME "$ANDROID_HOME/ndk/"(ls -1 "$ANDROID_HOME/ndk" | head -n 1)
 
 set -gx PATH $HOME/.cargo/bin $PATH
 

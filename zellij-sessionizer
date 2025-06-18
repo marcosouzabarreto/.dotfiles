@@ -52,17 +52,12 @@ if ! command -v zellij &> /dev/null; then
     exit 1
 fi
 
-# Check if we're already inside a Zellij session
 if [[ -n "$ZELLIJ" ]]; then
-    # Create new session and switch to it
     zellij action new-tab --name "$selected_name" --cwd "$selected"
 else
-    # Check if session exists
     if zellij list-sessions 2>/dev/null | grep -q "^$selected_name"; then
-        # Attach to existing session
         zellij attach "$selected_name"
     else
-        # Create new session
         zellij --session "$selected_name" options --default-cwd "$selected"
     fi
 fi

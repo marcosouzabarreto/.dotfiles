@@ -19,6 +19,8 @@ return {
         "rust_analyzer",
         "gopls",
         "pyright",
+        "eslint",
+        "ts_ls",
       },
       handlers = {
         function(server_name)
@@ -38,6 +40,24 @@ return {
                 }
               }
             }
+          }
+        end,
+        ["eslint"] = function()
+          local lspconfig = require("lspconfig")
+          lspconfig.eslint.setup {
+            capabilities = capabilities,
+            settings = {
+              codeActionOnSave = {
+                enable = true,
+                mode = "all"
+              },
+            },
+            on_attach = function(client, bufnr)
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                command = "EslintFixAll",
+              })
+            end,
           }
         end,
       }

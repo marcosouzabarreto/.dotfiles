@@ -4,7 +4,9 @@ require("conform").setup({
     go = { "goimports" ,"gofmt" },
     python = { "black" },
     rust = { "rustfmt", lsp_format = "fallback" },
-    javascript = { "prettier" },
-    typescript = { "prettier" },
+    javascript = { "eslint_d", "prettier" },
+    typescript = { "eslint_d", "prettier" },
+    javascriptreact = { "eslint_d", "prettier" },
+    typescriptreact = { "eslint_d", "prettier" },
   },
 })

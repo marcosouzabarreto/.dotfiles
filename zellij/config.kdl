@@ -258,24 +258,18 @@ load_plugins {
 //   - true
 //   - false (Default)
 //
-simplified_ui false
+simplified_ui true
 
-// Choose the theme that is specified in the themes section.
-// Default: default
-//
-// theme "dracula"
+theme "catppuccin-macchiato"
 
-// Choose the base input mode of zellij.
-// Default: normal
-//
+default_layout "compact"
+
+pane_frames false
+
 default_mode "locked"
 
 session_serialization false
 
-// The name of the default layout to load on startup
-// Default: "default"
-//
-// default_layout "compact"
 
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -292,7 +286,6 @@ session_serialization false
 //   - true (default, enabled)
 //   - false
 //
-// pane_frames false
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed

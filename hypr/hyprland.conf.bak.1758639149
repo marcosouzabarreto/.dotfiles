@@ -22,8 +22,7 @@
 ################
 
 # See https://wiki.hyprland.org/Configuring/Monitors/
-monitor=HDMI-A-1,1920x1080@165.00,-32x0,1.00
-monitor=eDP-1, 2560x1440@240, auto, auto
+monitor=HDMI-A-1, 1920x1080@165.00, auto, auto
 
 
 ###################

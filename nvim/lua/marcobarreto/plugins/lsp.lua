@@ -8,6 +8,14 @@ return {
 	},
 
 	config = function()
+		local notify = vim.notify
+		vim.notify = function(msg, ...)
+			if msg:match("lspconfig.*deprecated") then
+				return
+			end
+			notify(msg, ...)
+		end
+
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
@@ -26,18 +34,18 @@ return {
 				"clangd",
 			},
 			handlers = {
-				        function(server_name)
-				          require("lspconfig")[server_name].setup({
-				            capabilities = capabilities,
-				          })
-				        end,
-				
-				        ["gdtoolkit"] = function()
-				          require("lspconfig").gdtoolkit.setup({
-				            capabilities = capabilities,
-				          })
-				        end,
-								["lua_ls"] = function()
+				function(server_name)
+					require("lspconfig")[server_name].setup({
+						capabilities = capabilities,
+					})
+				end,
+
+				["gdtoolkit"] = function()
+					require("lspconfig").gdtoolkit.setup({
+						capabilities = capabilities,
+					})
+				end,
+				["lua_ls"] = function()
 					require("lspconfig").lua_ls.setup({
 						capabilities = capabilities,
 						settings = {
